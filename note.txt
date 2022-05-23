@@ -1,0 +1,7 @@
+MVC + R
+
+Model -> Database
+Controller -> Ngontrol Data
+View -> HTML Tampilan
+
+Route -> user public bisa ngakses
