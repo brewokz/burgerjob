@@ -26,13 +26,13 @@ class OrderController extends Controller
 
     public function checkout(Request $request)
     {
-        $amount = null;
+        $amount = 0.0;
         if ($request->is_split_bill == 1) {
             $request->validate([
                 'payment_method' => 'required',
                 'number_of_split' => 'required|numeric|min:2',
             ]);
-            $amount = $request->total_price / $request->number_of_split;
+            $amount = floatval($request->total_price) / floatval($request->number_of_split);
         } else {
             $request->validate([
                 'payment_method' => 'required',
@@ -106,6 +106,7 @@ class OrderController extends Controller
         }
 
         DB::commit();
+
         return view('pages.cart.success', compact('getDate', 'reportlastOrder', 'getLastOrder'))->with('create', 'Order Success');
     }
     public function print()

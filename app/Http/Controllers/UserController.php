@@ -23,7 +23,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        // Query ke database product where is_deleted = false
+        $user = User::where('is_deleted', false)->get();
         return view('pages.user.user', compact('user'));
     }
 
@@ -109,12 +110,17 @@ class UserController extends Controller
     {
         $request->validate([
             'fullname' => 'required',
-            'is_admin' => 'required'
+            'is_admin' => 'required',
+            'address'  => 'required',
+            'phone_number' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:10'
+
         ]);
         User::where('id', $user->id)
             ->update([
                 'fullname' => $request->fullname,
-                'is_admin' => $request->is_admin
+                'is_admin' => $request->is_admin,
+                'address'  => $request->address,
+                'phone_number' => $request->phone_number
             ]);
         return redirect('user')->with('change', 'User Updated successfully!');
     }
@@ -265,7 +271,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         try {
-            User::destroy($user->id);
+            // update user is_deleted to true
+            User::where('id', $user->id)
+                ->update([
+                    'is_deleted' => true
+                ]);
             return redirect('user')->with('delete', 'User deleted successfully!');
         } catch (Throwable $e) {
             report($e);

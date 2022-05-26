@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('phone_number');
             $table->boolean('is_change_password')->default(false);
             $table->string('profile_picture')->nullable();
+            $table->boolean('is_deleted')->default(false);
             $table->rememberToken();
             $table->timestamps();
         });

@@ -46,7 +46,7 @@
                 @method('PATCH')
                 @csrf
                 <div class="form-group row">
-                    <label for="fullname" class="col-sm-2 col-form-label">Name*</label>
+                    <label for="fullname" class="col-sm-2 col-form-label">Name</label>
                     <div class="col-sm-10">
                         <input type="text" class="form-control @error('fullname') is-invalid @enderror" id="fullname" name="fullname" value="{{$user->fullname}}">
                         @error('fullname')
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="form-group row">
-                    <label for="username" class="col-sm-2 col-form-label">User Name*</label>
+                    <label for="username" class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-5">
                         <input type="text" class="form-control @error('username') is-invalid @enderror" id="username" name="username" value="{{$user->username}}" disabled>
                         @error('username')
@@ -68,6 +68,26 @@
                     <div class="col-sm-5">
                         <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{$user->email}}" disabled>
                         @error('email')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="address" class="col-sm-2 col-form-label">Address</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control @error('address') is-invalid @enderror" id="address" name="address" value="{{$user->address}}">
+                        @error('address')
+                        <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="form-group row">
+                    <label for="phone_number" class="col-sm-2 col-form-label">Phone Number</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control @error('phone_number') is-invalid @enderror" id="phone_number" name="phone_number" value="{{$user->phone_number}}">
+                        @error('phone_number')
                         <div class="invalid-feedback">{{$message}}</div>
                         @enderror
                     </div>
@@ -92,7 +112,7 @@
                     </div>
                 </div> -->
                 <div class="form-group row">
-                    <label for="is_admin" class="col-sm-2 col-form-label">Status*</label>
+                    <label for="is_admin" class="col-sm-2 col-form-label">Role</label>
                     <div class="col-sm-5">
                         <select class="form-control select2 @error('is_admin') is-invalid @enderror" id="is_admin" name="is_admin" value="{{$user->is_admin}}">
                             @if($user->is_admin===0)

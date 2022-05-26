@@ -20,8 +20,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        // Query ke database
-        $product = Product::all();
+        // Query ke database product where is_deleted = false
+        $product = Product::where('is_deleted', false)->get();
 
         // Hasil query di kirim ke view index.blade.php
         return view('pages.product.product', compact('product'));
@@ -105,10 +105,18 @@ class ProductController extends Controller
         $request->validate([
             'sku' => 'required|unique:products',
             'name' => 'required',
-            'quantity' => 'required|numeric',
-            'price' => 'required|numeric',
+            'quantity' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
             'product_picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
+
+        if ($request->quantity < 0) {
+            return redirect()->back()->with('error', 'Quantity must be more than 0');
+        }
+
+        if ($request->price < 0) {
+            return redirect()->back()->with('error', 'Price must be more than 0');
+        }
 
         //image name
         $imageName = time() . '_product.' . $request->product_picture->extension();
@@ -120,6 +128,7 @@ class ProductController extends Controller
             'quantity' => $request->quantity,
             'price' => $request->price,
             'description' => $request->description,
+            'is_deleted' => false,
             'product_picture' => $imageName
         ]);
         return redirect('product')->with('create', 'Product added successfully!');
@@ -170,13 +179,10 @@ class ProductController extends Controller
         $request->validate([
             'sku' => ['required', Rule::unique('products', 'sku')->ignore($product->id)],
             'name' => 'required',
-            'quantity' => 'required|numeric',
-            'price' => 'required|numeric',
+            'quantity' => 'required|numeric|min:0',
+            'price' => 'required|numeric|min:0',
             'product_picture' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048'
         ]);
-        if ((int)$request->quantity < 0) {
-            return redirect('product')->with('error', 'Quantity must be more than 0');
-        }
 
         if ($request->hasFile('product_picture')) {
             //image name
@@ -213,7 +219,12 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         try {
-            Product::destroy($product->id);
+            // update product is_deleted = true
+            Product::where('id', $product->id)
+                ->update([
+                    'is_deleted' => true
+                ]);
+
             return redirect('product')->with('delete', 'Product deleted successfully!');
         } catch (Throwable $e) {
             report($e);

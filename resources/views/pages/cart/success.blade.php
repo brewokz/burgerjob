@@ -92,13 +92,13 @@
                                     <tr>
                                         <td>{{$item->quantity}}</td>
                                         <td>{{ucwords($item->name)}}</td>
-                                        <td>Rp. {{number_format($item->price)}}</td>
+                                        <td>Rp. {{$item->price}}</td>
                                         @if($item->note == null)
                                         <td>-</td>
                                         @else
                                         <td>{{$item->note}}</td>
                                         @endif
-                                        <td>Rp. {{number_format($item->total_price)}}</td>
+                                        <td>Rp. {{$item->total_price}}</td>
                                     </tr>
                                     @endforeach
                                 </tbody>
@@ -119,7 +119,7 @@
                                 <table class="table">
                                     <tr>
                                         <th style="width:50%">Subtotal:</th>
-                                        <td>Rp. {{number_format($getLastOrder->total_price)}}</td>
+                                        <td>Rp. {{$getLastOrder->total_price}}</td>
                                     </tr>
                                     <!-- <tr>
                                         <th>Tax (9.3%)</th>
@@ -130,12 +130,12 @@
                                         @if($getLastOrder->amount_split_bill == null)
                                         <td>-</td>
                                         @else
-                                        <td>Rp. {{number_format($getLastOrder->amount_split_bill)}}</td>
+                                        <td>Rp. {{$getLastOrder->amount_split_bill}}</td>
                                         @endif
                                     </tr>
                                     <tr>
                                         <th>Total:</th>
-                                        <td>Rp. {{number_format($getLastOrder->total_price)}}</td>
+                                        <td>Rp. {{$getLastOrder->total_price}}</td>
                                     </tr>
                                 </table>
                             </div>

@@ -18,11 +18,11 @@ class CreateOrdersTable extends Migration
             $table->foreignId('user_id')->constrained('users');
             $table->string('slug')->unique();
             $table->dateTime('date');
-            $table->integer('total_price');
+            $table->float('total_price');
             $table->string('payment_method');
             $table->boolean('is_split_bill')->nullable();
             $table->integer('number_of_split')->nullable();
-            $table->integer('amount_split_bill')->nullable();
+            $table->float('amount_split_bill')->nullable();
             $table->timestamps();
         });
     }

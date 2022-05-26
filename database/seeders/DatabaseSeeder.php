@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => true,
             'sex' => 'male',
             'address' => 'munich',
+            'is_deleted' => false,
             'phone_number' => '08123456789',
             'profile_picture' => 'unknown.png'
         ]);
@@ -37,6 +38,7 @@ class DatabaseSeeder extends Seeder
             'is_admin' => false,
             'sex' => 'male',
             'address' => 'amsterdam',
+            'is_deleted' => false,
             'phone_number' => '08123456780',
             'profile_picture' => 'unknown.png'
         ]);
@@ -47,6 +49,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '200',
             'description' => 'Burger with mozzarela',
             'price' => '50000',
+            'is_deleted' => false,
             'product_picture' => '1647635177_product.jpg'
         ]);
 
@@ -56,6 +59,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '200',
             'description' => 'Burger with double beef',
             'price' => '50000',
+            'is_deleted' => false,
             'product_picture' => '1647635198_product.jpg'
         ]);
 
@@ -65,6 +69,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '200',
             'description' => 'Burger with sweet paty',
             'price' => '50000',
+            'is_deleted' => false,
             'product_picture' => '1647635217_product.jpg'
         ]);
         Product::create([
@@ -73,6 +78,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '200',
             'description' => 'Burger with chicken',
             'price' => '50000',
+            'is_deleted' => false,
             'product_picture' => '1647635251_product.jpg'
         ]);
         Product::create([
@@ -81,6 +87,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '200',
             'description' => 'Burger with blackpaper',
             'price' => '50000',
+            'is_deleted' => false,
             'product_picture' => '1647635263_product.jpg'
         ]);
         Product::create([
@@ -89,6 +96,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '500',
             'description' => 'Coke 500ml',
             'price' => '12000',
+            'is_deleted' => false,
             'product_picture' => 'coca_cola.jpg'
         ]);
         Product::create([
@@ -97,6 +105,7 @@ class DatabaseSeeder extends Seeder
             'quantity' => '500',
             'description' => 'Pepsi 500ml',
             'price' => '12000',
+            'is_deleted' => false,
             'product_picture' => 'pepsi.jpg'
         ]);
     }
