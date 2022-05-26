@@ -24,7 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::where('is_deleted', false)->get();
         if (Auth()->user()->is_admin == 1) {
             return view('home');
         } else {
@@ -41,9 +41,9 @@ class HomeController extends Controller
     {
         $products = [];
         if (is_null($request->name)) {
-            $products = Product::all();
+            $products = Product::where('is_deleted', false)->get();
         } else {
-            $products = Product::where('name', 'like', '%' . $request->name . '%')->get();
+            $products = Product::where('name', 'like', '%' . $request->name . '%')->where('is_deleted',false)->get();
         }
         return view('home', compact('products'));
     }
